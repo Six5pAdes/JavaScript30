@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS Variables</title>
+    <link rel="icon" href="https://fav.farm/❓" />
+</head>
+
+<body>
+    <h2>Update CSS Variables with <span class="hl">JS</span></h2>
+
+    <div class="controls">
+        <label for="spacing">Spacing:</label>
+        <input type="range" name="spacing" min="0" max="200" value="10" data-sizing="px">
+
+        <label for="blue">Blur:</label>
+        <input type="range" name="blur" min="0" max="25" value="10" data-sizing="px">
+
+        <label for="base">Base Color:</label>
+        <input type="color" name="base" value="#ffc600">
+    </div>
+
+    <img id="image" src="https:/unsplash.it/800/500">
+
+    <button id="new-img">Get New Image</button>
+
+    <style>
+        :root {
+            --base: #ffc600;
+            --spacing: 10px;
+            --blur: 10px;
+        }
+
+        img {
+            padding: var(--spacing);
+            background: var(--base);
+            filter: blur(var(--blur));
+            display: block;
+            margin: 20px auto;
+            border-radius: 10px;
+            max-width: 100%;
+        }
+
+        .h2 {
+            color: var(--base)
+        }
+
+        body {
+            text-align: center;
+            background: #135790;
+            color: white;
+            font-family: Arial, Helvetica, sans-serif;
+            font-weight: 100;
+            font-size: 50px;
+        }
+
+        .controls {
+            margin-bottom: 50px;
+        }
+
+        a {
+            color: var(--base);
+            text-decoration: none;
+        }
+
+        input {
+            width: 100px;
+        }
+
+        button {
+            background: var(--base);
+            color: black;
+            font-size: 20px;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            opacity: 0.8;
+        }
+    </style>
+
+    <script>
+        const inputs = document.querySelectorAll('.controls input')
+
+        function update() {
+            const suffix = this.dataset.sizing || '';
+            document.documentElement.style.setProperty(`--${this.name}`, this.value + suffix)
+        }
+
+        inputs.forEach(input => input.addEventListener('change', update))
+        inputs.forEach(input => input.addEventListener('mousemove', update))
+
+        document.getElementById('new-img').addEventListener('click', function () {
+            document.getElementById('image').src = `https://unsplash.it/800/500`;
+        })
+    </script>
+</body>
+
+</html>
