@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Array Cardio</title>
+    <link rel="icon" href="https://fav.farm/💪🏼" />
+</head>
+
+<body>
+    <script>
+        const inventors = [
+            { firstName: "Isaac", lastName: "Newton", birth: 1643, death: 1727 },
+            { firstName: "Albert", lastName: "Einstein", birth: 1879, death: 1955 },
+            { firstName: "Nicholas", lastName: "Tesla", birth: 1856, death: 1943 },
+            { firstName: "Thomas", lastName: "Edison", birth: 1847, death: 1931 },
+            { firstName: "Leonardo", lastName: "da Vinci", birth: 1452, death: 1519 },
+            { firstName: "Marie", lastName: "Curie", birth: 1867, death: 1934 },
+            { firstName: "Galileo", lastName: "Galilei", birth: 1564, death: 1642 },
+            { firstName: "Charles", lastName: "Darwin", birth: 1809, death: 1882 },
+            { firstName: "Alexander", lastName: "Graham-Bell", birth: 1847, death: 1922 },
+            { firstName: "Ada", lastName: "Lovelace", birth: 1815, death: 1852 },
+            { firstName: "Louis", lastName: "Pasteur", birth: 1822, death: 1895 },
+            { firstName: "Alan", lastName: "Turing", birth: 1912, death: 1954 }
+        ]
+
+        const people = [
+            'Carter, Olivia', 'Reynolds, Ethan', 'Mitchell, Sophia', 'Hayes, Jackson', 'Richardson, Ava', 'Brooks, Mason', 'Cooper, Isabella', 'Bennett, Logan', 'Sanders, Emily', 'Foster, Liam', 'Parker, Charlotte', 'Sullivan, Noah', 'Ward, Amelia', 'Perry, Lucas', 'Bryant, Harper', 'Ross, Benjamin', 'Murphy, Grace', 'Patterson, Henry', 'Hughes, Scarlet', 'Coleman, Daniel', 'James, Evelyn', 'Scott, Matthew', 'Adams, Lily', 'Turner, Samuel', 'Phillips, Chloe', 'Bennett, David', 'Reed, Zoe', 'Miller, Joseph', 'Green, Madison', 'Evans, Chris', 'Clark, Natalie', 'Baker, Andrew', 'Wright, Hannah', 'Morgan, Jonathan', 'Hall, Victoria', 'Nelson, William', 'Stewart, Penelope', 'Russell, James', 'Simmons, Abigail', 'Torres, Elijah', 'Fisher, Nora'
+        ]
+
+        // Array.prototype.filter()
+        // 1. Filter the list of inventors for those who were born in the 1500's
+        const fifteen = inventors.filter(inventor => (inventor.birth >= 1800 && inventor.birth < 1900))
+        console.table("1. ", fifteen)
+
+        // Array.prototype.map()
+        // 2. Give us an array of the inventors first and last names
+        const fullNames = inventors.map(inventor => `${inventor.firstName} ${inventor.lastName}`)
+        console.log("2. ", fullNames)
+
+        // Array.prototype.sort()
+        // 3. Sort the inventors by birthdate, oldest to youngest
+        const ordered = inventors.sort((a, b) => (a.birth > b.birth ? 1 : -1))
+        console.log("3. ", ordered)
+
+        // Array.prototype.reduce()
+        // 4. How many years did all the inventors live all together?
+        const totalYears = inventors.reduce((total, inventor) => {
+            return total + (inventor.death - inventor.birth)
+        }, 0)
+        console.log("4. ", totalYears)
+
+        // 5. Sort the inventors by years lived
+        const oldest = inventors.sort((a, b) => {
+            const younger = a.death - a.birth;
+            const older = b.death - b.birth;
+
+            return younger > older ? -1 : 1;
+        })
+        console.table("5. ", oldest)
+
+        // 6. create a list of Boulevards in Paris that contain 'de' anywhere in the name
+        // https://en.wikipedia.org/wiki/Category:Boulevards_in_Paris
+        // const category = document.querySelector('.mw-category');
+        // const links = Array.from(category.querySelectorAll('a'));
+        // const de = links
+        //     .map(link => link.textContent)
+        //     .filter(streetName => streetName.includes('de'))
+
+        // 7. sort Exercise
+        // Sort the people alphabetically by last name
+        const allLasts = people.sort((z, a) => {
+            const [zLast, zFirst] = z.split(', ');
+            const [aLast, aFirst] = a.split(', ');
+
+            return zLast > aLast ? 1 : -1;
+        })
+        console.log("7. ", allLasts)
+
+        // 8. Reduce Exercise
+        // Sum up the instances of each of these
+        const data = ['car', 'car', 'truck', 'truck', 'bike', 'walk', 'car', 'van', 'bike', 'walk', 'car', 'van', 'car', 'truck', 'pogostick'];
+
+        const vehicles = data.reduce(function (obj, item) {
+            if (!obj[item]) {
+                obj[item] = 0;
+            }
+            obj[item]++;
+            return obj;
+        }, {});
+        console.log("8. ", vehicles)
+    </script>
+</body>
+
+</html>
