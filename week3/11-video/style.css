@@ -1,0 +1,202 @@
+html {
+  box-sizing: border-box;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  background: #7a419b;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #e1dbe2 0%, #e9caea 48%, #bdacde 100%);
+  background-size: cover;
+  align-items: center;
+  justify-content: center;
+}
+
+.player {
+  max-width: 750px;
+  /* border: 5px solid rgba(0, 0, 0, 0.2); */
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+  position: relative;
+  font-size: 0;
+  overflow: hidden;
+}
+
+/* This css is only applied when fullscreen is active. */
+.player:fullscreen {
+  max-width: none;
+  width: 100%;
+}
+
+.player:-webkit-full-screen {
+  max-width: none;
+  width: 100%;
+}
+
+.player__video {
+  width: 100%;
+}
+
+.player__button {
+  background: none;
+  border: 0;
+  line-height: 1;
+  color: white;
+  text-align: center;
+  outline: 0;
+  padding: 0;
+  cursor: pointer;
+  max-width: 50px;
+}
+
+.player__button:focus {
+  border-color: #ffc600;
+}
+
+.player__slider {
+  width: 10px;
+  height: 30px;
+}
+
+.player__controls {
+  display: flex;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  transform: translateY(100%) translateY(-5px);
+  transition: all 0.3s;
+  flex-wrap: wrap;
+  background: rgba(0, 0, 0, 0.1);
+}
+
+.player:hover .player__controls {
+  transform: translateY(0);
+}
+
+.player:hover .progress {
+  height: 15px;
+}
+
+.player__controls > * {
+  flex: 1;
+}
+
+.progress {
+  flex: 10;
+  position: relative;
+  display: flex;
+  flex-basis: 100%;
+  height: 5px;
+  transition: height 0.3s;
+  background: rgba(0, 0, 0, 0.5);
+  cursor: ew-resize;
+}
+
+.progress__filled {
+  width: 50%;
+  background: #ffc600;
+  flex: 0;
+  flex-basis: 50%;
+}
+
+.fullscreen {
+  max-width: 50px;
+  font-size: 1.2rem;
+}
+
+/* unholy css to style input type="range" */
+
+input[type="range"] {
+  appearance: none;
+  -webkit-appearance: none;
+  background: transparent;
+  width: 100%;
+  margin: 5px 5px;
+  height: 8px;
+  border-radius: 4px;
+  outline: none;
+  overflow: hidden;
+  position: relative;
+}
+
+input[type="range"]:focus {
+  outline: none;
+}
+
+input[type="range"]::-webkit-slider-runnable-track {
+  width: 100%;
+  height: 8.4px;
+  cursor: pointer;
+  box-shadow: 1px 1px 1px rgba(0, 0, 0, 0), 0 0 1px rgba(13, 13, 13, 0);
+  background: rgba(255, 255, 255, 0.8);
+  border-radius: 5px;
+  border: 0.2px solid rgba(1, 1, 1, 0);
+}
+
+input[type="range"]::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 0;
+  background: #ffc600;
+  border-radius: 5px;
+  z-index: -1;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  height: 15px;
+  width: 15px;
+  border-radius: 50px;
+  background: #ffc600;
+  cursor: pointer;
+  -webkit-appearance: none;
+  margin-top: -3.5px;
+  box-shadow: 0 0 2px rgba(0, 0, 0, 0.2);
+  position: relative;
+  z-index: 2;
+}
+
+input[type="range"]::-moz-range-track {
+  width: 100%;
+  height: 8.4px;
+  cursor: pointer;
+  box-shadow: 1px 1px 1px rgba(0, 0, 0, 0), 0 0 1px rgba(13, 13, 13, 0);
+  background: #ffffff;
+  border-radius: 1.3px;
+  border: 0.2px solid rgba(1, 1, 1, 0);
+}
+
+input[type="range"]::-moz-range-thumb {
+  box-shadow: 0 0 0 rgba(0, 0, 0, 0), 0 0 0 rgba(13, 13, 13, 0);
+  height: 15px;
+  width: 15px;
+  border-radius: 50px;
+  background: #ffc600;
+  cursor: pointer;
+}
+
+.dark-mode {
+  background: linear-gradient(135deg, #2c2c2c 0%, #1a1a1a 48%, #000000 100%);
+}
+
+.dark-mode .player {
+  border-color: rgba(255, 255, 255, 0.2);
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+}
+
+.dark-mode .player__controls {
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.dark-mode .player__button {
+  color: yellow;
+}
