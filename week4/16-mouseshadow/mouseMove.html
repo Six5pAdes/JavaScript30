@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mouse Moving</title>
+    <link rel="icon" href="https://fav.farm/🖱" />
+</head>
+
+<body>
+    <div class="shad">
+        <h1 contenteditable>👁 watch 👄 this 👁</h1>
+    </div>
+
+    <style>
+        html {
+            color: black;
+            font-family: sans-serif;
+        }
+
+        body {
+            margin: 0;
+        }
+
+        .shad {
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: black;
+        }
+
+        h1 {
+            text-shadow: 10px 10px 0 rgb(128, 128, 128);
+            font-size: 100px;
+        }
+    </style>
+
+    <script>
+        const shad = document.querySelector(".shad");
+        const text = shad.querySelector("h1");
+        const walk = 200;
+
+        function shadow(e) {
+            const { offsetWidth: width, offsetHeight: height } = shad;
+            let { offsetX: x, offsetY: y } = e;
+
+            if (this !== e.target) {
+                x = x + e.target.offsetLeft;
+                y = y + e.target.offsetTop;
+            }
+
+            const xWalk = Math.round((x / width * walk) - (walk / 2));
+            const yWalk = Math.round((y / height * walk) - (walk / 2));
+
+            text.style.textShadow = `
+            ${xWalk}px ${yWalk}px 0 rgb(166,173,176),
+            ${xWalk * -1}px ${yWalk}px 0 rgb(190,156,239),
+            ${yWalk}px ${xWalk * -1}px 0 rgb(209, 255, 42),
+            ${yWalk * -1}px ${xWalk}px 0 black
+            `
+        }
+
+        shad.addEventListener("mousemove", shadow);
+    </script>
+</body>
+
+</html>
