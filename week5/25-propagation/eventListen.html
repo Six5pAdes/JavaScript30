@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Capture, Propagation, Bubbling & Once</title>
+    <link rel="icon" href="https:fav.farm/">
+</head>
+
+<body class="bod">
+    <div class="one">
+        <div class="two">
+            <div class="three">
+            </div>
+        </div>
+    </div>
+
+    <style>
+        html {
+            box-sizing: border-box;
+        }
+
+        *,
+        *:before,
+        *:after {
+            box-sizing: inherit;
+        }
+
+        div {
+            width: 100%;
+            padding: 100px;
+        }
+
+        .one {
+            background: thistle;
+        }
+
+        .two {
+            background: mistyrose;
+        }
+
+        .three {
+            background: coral;
+        }
+    </style>
+
+    <button></button>
+
+    <script>
+        const divs = document.querySelectorAll('div')
+        const butt = document.querySelector('button')
+
+        function logText(e) {
+            console.log(this.classList.value)
+            e.stopPropagation()
+        }
+
+        document.body.addEventListener('click', logText)
+
+        divs.forEach(div => div.addEventListener('click', logText, {
+            // capture: true
+            capture: false,
+            once: true
+        }))
+
+        butt.addEventListener('click', () => {
+            console.log("Click!")
+        }, {
+            once: true
+        })
+    </script>
+</body>
+
+</html>
